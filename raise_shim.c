@@ -2,6 +2,7 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ruby.h>
 
 void
 rb_raise(unsigned long exc, const char *fmt, ...)
@@ -13,7 +14,7 @@ rb_raise(unsigned long exc, const char *fmt, ...)
   char * error;
 
   if (!libruby_rb_raise) {
-    handle = dlopen("/Users/john/.rvm/src/ruby-1.9.3-p0/libruby.1.9.1.dylib",
+    handle = dlopen("/home/john/.rvm/rubies/ruby-1.9.2-p180/lib/libruby.so",
                     RTLD_LAZY);
     if (!handle) {
       fputs(dlerror(), stderr);
@@ -26,7 +27,11 @@ rb_raise(unsigned long exc, const char *fmt, ...)
     }
   }
 
-  printf("calling old rb_raise()");
-  libruby_rb_raise(exc, fmt);
-  printf("finished calling old rb_raise()\n");
+  //printf("calling old rb_raise()");
+  fflush(stdout);
+//  libruby_rb_raise(exc, "i want to see you naked, especially from the back.");
+  rb_funcall(rb_cObject, rb_intern("raise"), 2, exc, rb_str_new2("hello baby"));
+//  printf("finished calling old rb_raise()\n");
+  fflush(stdout);
 }
+
