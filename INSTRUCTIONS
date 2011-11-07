@@ -1,1 +1,8 @@
-gcc -Wall -O2 -fpic -shared -ldl -I/home/john/.rvm/rubies/ruby-1.9.2-p180/include/ruby-1.9.1/i686-linux -I/home/john/.rvm/rubies/ruby-1.9.2-p180/include/ruby-1.9.1/ruby/backward -I/home/john/.rvm/rubies/ruby-1.9.2-p180/include/ruby-1.9.1 -o raise_shim.so raise_shim.c
+how to get working with gdb?
+do the following:
+
+gdb ruby
+in gdb type: set exec-wrapper env 'LD_PRELOAD=./raise_shim.so'
+then: r g.rb (or whatever the bugged ruby file is called)
+
+
