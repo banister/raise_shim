@@ -14,7 +14,7 @@ rb_raise(unsigned long exc, const char *fmt, ...)
   char * error;
 
   if (!libruby_rb_raise) {
-    handle = dlopen("/home/john/.rvm/rubies/ruby-1.9.2-p290/lib/libruby.so",
+    handle = dlopen("/Users/john/.rvm/rubies/ruby-1.9.2-p290/lib/libruby.dylib",
                     RTLD_LAZY);
     if (!handle) {
       fputs(dlerror(), stderr);
@@ -33,4 +33,5 @@ rb_raise(unsigned long exc, const char *fmt, ...)
   //   printf("finished calling old rb_raise()\n");
   // return Qnil;
 }
+
 
